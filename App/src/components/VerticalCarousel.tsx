@@ -8,9 +8,9 @@ interface VerticalCarouselProps {
 const VerticalCarousel = (props: VerticalCarouselProps) => { 
     return (
         <>
-            <div className="snap-y snap-proximity">
+            <div className="snap-y snap-mandatory snap-vertical">
                 {props.slides.map((slide, index) => (
-                    <div key={index} className="snap-start">
+                    <div key={index} className="scroll-start">
                         {slide}
                     </div>
                 ))}
