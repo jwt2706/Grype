@@ -31,7 +31,6 @@ const VerticalCarousel = (props: VerticalCarouselProps) => {
         setOnLoad(onLoad + 1);
     }
 
-
     return (
         <>
             <div className="snap-y snap-mandatory snap-vertical">
