@@ -26,12 +26,12 @@ const AppProvider = () => {
     const [onInitialLoad, setOnInitialLoad] = useState(true);
     const [name, setName] = useState<string | null>(null);
     useEffect(() => {
-      if (!localStorage.getItem('name')) {
+      if (!localStorage.getItem('name')) {  
         setOnInitialLoad(true);
       } else {
         setOnInitialLoad(false);
       }
-    }, [])
+    }, [name])
     return (
         <>
             { onInitialLoad ? <InitializeApp setName={setName} /> : <NonInitializedApp /> }
@@ -43,6 +43,7 @@ interface InitializeAppProps {
     setName: (name: string) => void;
 }
 const InitializeApp = (props: InitializeAppProps) => {
+    const [username, setUsername] = useState<string | null>(null);
     // animate this 
     return (
       <>
@@ -57,12 +58,13 @@ const InitializeApp = (props: InitializeAppProps) => {
                 placeholder="someone special <3"
                 variant="standard"
                 onChange={(e) => {
-                    props.setName(e.target.value);
+                    setUsername(e.target.value);
+                    localStorage.setItem('name', e.target.value);
                 }} />
             </div>
             <div>
                 <button className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => {
-                   
+                    props.setName(username!);
                 }}>Submit</button>
             </div>
         </>}
