@@ -9,6 +9,10 @@ import { SuggestionWidgetData } from './types/SuggestionWidgetData'
 import { EndWidgetData } from './types/EndWidgetData'
 import Container from './components/Container'
 import { TextField } from '@mui/material'
+import { generateWidgets } from './utils/generateWidgets'
+import { CategoryType } from './types/Categories'
+import { Widget as WidgetType } from './types/Widget'
+import AnalyzingVoice from './components/categories/AnalyzingVoice'
 
 function App() {
     return (
@@ -74,7 +78,20 @@ const InitializeApp = (props: InitializeAppProps) => {
 }
 
 const NonInitializedApp = () => {
-    const [widget, setWidgets] = useState<JSX.Element[]>([]);
+    const [widget, setWidgets] = useState<React.ReactNode[]>([]);
+    const [configState, setConfigState] = useState<true | false | null>(true);
+
+    useEffect(() => {
+        if (!localStorage.getItem('config')) {
+            const config = generateConfig();
+            localStorage.setItem('config', JSON.stringify(config));
+            setConfigState(false)
+        } else {
+            setConfigState(true);
+        }
+    }, [configState]);
+ 
+
 
     useEffect(() => {
         const slideData = ContentService.generateWidgets();
@@ -117,13 +134,37 @@ const NonInitializedApp = () => {
 
         setWidgets(newWidgets);
     }, []);
+
+    console.log(configState);
     return (
          /// start with the logic that collects the voice recording then transition to the widgets
         <>
+        {configState ? <AnalyzingVoice setWidgets={setWidgets} setConfigState={setConfigState} /> : 
           <Container>
               <VerticalCarousel slides={widget}>
               </VerticalCarousel>
-          </Container>  
+          </Container>
+    }
         </>
     );
+}
+
+function generateConfig() {
+    const widgetConfig = {
+        [CategoryType.EXCERSIZE]: ['Run', 'Yoga', 'Gym'],
+        [CategoryType.SOCIAL]: ['Call a friend', 'Join a club', 'Attend a meetup'],
+        [CategoryType.FOOD]: ['Eat a salad', 'Try a new recipe', 'Have a smoothie'],
+        [CategoryType.WATER]: ['Drink a glass of water', 'Have some herbal tea', 'Stay hydrated']
+    };
+
+    const widgetData: WidgetType = {
+        config: widgetConfig,
+        numberOfWidgets: 10
+    };
+
+    const config = generateWidgets(widgetData);
+
+    console.log(config);
+
+    return (config);
 }
