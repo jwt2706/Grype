@@ -16,6 +16,14 @@ function App() {
         const slideData = ContentService.generateWidgets();
         const newWidgets: JSX.Element[] = []
 
+        for (let i = 0; i < 4; i++) {
+            newWidgets.push(
+                <Widget>
+                    Slide {i} 
+                </Widget>
+            );
+        }
+
         for (const slide of slideData) {
             if (slide instanceof EndOfDayWidgetData) {
                 newWidgets.push(
@@ -49,11 +57,10 @@ function App() {
     return (
         <>
             <Layout>
-          <Container>
-                <VerticalCarousel slides={widget}>
-                </VerticalCarousel>
-        </Container>
-            
+              <Container>
+                    <VerticalCarousel slides={widget}>
+                    </VerticalCarousel>
+              </Container>  
             </Layout>
         </>
     )

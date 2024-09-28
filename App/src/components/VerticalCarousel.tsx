@@ -18,7 +18,7 @@ const VerticalCarousel = (props: VerticalCarouselProps) => {
                 moveSlide(1);
             }
         });
-    }, [onLoad]);
+    }, [onLoad, props.slides]);
 
     const moveSlide = (direction: number) => {
         if (index == props.slides.length) {
