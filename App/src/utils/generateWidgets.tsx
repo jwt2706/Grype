@@ -6,7 +6,7 @@ import Water from "../components/categories/Water";
 import Widget from "../components/Widget";
 import Affirmation from "../components/categories/Affirmation";
 
-interface Widget {
+export interface Widget {
     config: {
         [CategoryType.EXCERSIZE]: string[];
         [CategoryType.SOCIAL]: string[];
