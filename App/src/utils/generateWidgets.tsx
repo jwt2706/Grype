@@ -53,7 +53,7 @@ export const generateWidgets = (props: Widget): React.ReactNode[] => {
                 continue;
             }
             const content = props.config[CategoryType.WATER].splice(0,1)
-            widgets.push(<Widget><Water water={content[0]} /></Widget>);
+            widgets.push(<Widget><Water drink={content[0]} /></Widget>);
         }
         else {
             const affirmation = "You are doing great!";
