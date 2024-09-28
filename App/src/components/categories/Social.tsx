@@ -1,3 +1,5 @@
+import { IoPeople } from "react-icons/io5";
+
 interface SocialProps {
     social: string;
 }
@@ -10,6 +12,7 @@ const Social = (props: SocialProps) => {
     return (
         <div className="text-2xl text-center">
             {props.social}
+            <IoPeople />
         </div>
     );
 }

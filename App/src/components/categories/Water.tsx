@@ -1,3 +1,5 @@
+import { LuGlassWater } from "react-icons/lu";
+
 interface WaterProps {
     water: string;
 }
@@ -10,6 +12,7 @@ const Water = (props: WaterProps) => {
     return (
         <div className="flex justify-center items-center h-[90vh]">
             {props.water}
+            <LuGlassWater />
         </div>
     );
 }
