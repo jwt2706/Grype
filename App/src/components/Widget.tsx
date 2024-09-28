@@ -7,7 +7,7 @@ interface WidgetProps {
 const Widget = (props: WidgetProps) => {
     return (
         <>
-            <div className="border-2 border-solid border-gray-400 rounded-md p-8 m-8 w-full">
+            <div className="border-2 border-solid border-gray-400 rounded-md p-8 mt-8 w-full">
                 {props.children}
             </div>
         </>
