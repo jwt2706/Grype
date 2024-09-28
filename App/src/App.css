@@ -19,6 +19,8 @@
     padding: 5px;
 }
 
-
+.snap-vertical {
+  scroll-snap-points-y: repeat(100vh);
+}
 
 

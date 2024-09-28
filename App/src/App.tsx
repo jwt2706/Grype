@@ -7,6 +7,7 @@ import { ContentService } from './services/ContentService'
 import { EndOfDayWidgetData } from './types/EndOfDayWidgetData'
 import { SuggestionWidgetData } from './types/SuggestionWidgetData'
 import { EndWidgetData } from './types/EndWidgetData'
+import Container from './components/Container'
 
 function App() {
     const [widget, setWidgets] = useState<JSX.Element[]>([]);
@@ -48,8 +49,11 @@ function App() {
     return (
         <>
             <Layout>
+          <Container>
                 <VerticalCarousel slides={widget}>
                 </VerticalCarousel>
+        </Container>
+            
             </Layout>
         </>
     )
