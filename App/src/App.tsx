@@ -13,6 +13,7 @@ import { generateWidgets } from './utils/generateWidgets'
 import { CategoryType } from './types/Categories'
 import { Widget as WidgetType } from './types/Widget'
 import AnalyzingVoice from './components/categories/AnalyzingVoice'
+import Initialization from './Initialization'
 
 function App() {
     return (
@@ -52,26 +53,9 @@ const InitializeApp = (props: InitializeAppProps) => {
     return (
       <>
         <div className="inital h-full w-full">
-        { <>
-          <div>Hi there!</div>
-          <div>What's your name?</div>
-          <div className="mt-20">
-            <TextField
-            sx={{ input: { color: 'white', textAlign: 'center' } }}
-                id="standard-basic"
-                placeholder="someone special <3"
-                variant="standard"
-                onChange={(e) => {
-                    setUsername(e.target.value);
-                    localStorage.setItem('name', e.target.value);
-                }} />
-            </div>
-            <div>
-                <button className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => {
-                    props.setName(username!);
-                }}>Submit</button>
-            </div>
-        </>}
+        <>
+        <Initialization setName={props.setName} />
+        </>
         </div>
       </>
     );
