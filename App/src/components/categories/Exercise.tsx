@@ -9,7 +9,7 @@ interface ExerciseProps {
 
 const Exercise = (props: ExerciseProps) => {
     return (
-        <div className="flex justify-center items-center h-full bg-blue-40">
+        <div className="flex justify-center items-center h-full bg-purple-400">
             {props.exercise}
         </div>
     );

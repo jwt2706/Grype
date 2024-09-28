@@ -8,7 +8,7 @@ interface FoodProps {
 
 const Food = (props: FoodProps) => {
     return (
-        <div className="flex justify-center items-center h-full bg-blue-40">
+        <div className="flex justify-center items-center h-full bg-orange-200">
             {props.food}
         </div>
     );

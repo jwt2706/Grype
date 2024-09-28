@@ -8,7 +8,7 @@ interface SocialProps {
 
 const Social = (props: SocialProps) => {
     return (
-        <div className="flex justify-center items-center h-full bg-blue-40">
+        <div className="flex justify-center items-center h-full bg-yellow-200">
             {props.social}
         </div>
     );

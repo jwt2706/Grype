@@ -9,7 +9,7 @@ interface AffirmationProps {
 
 const Affirmation = (props: AffirmationProps) => {
     return (
-        <div className="flex justify-center items-center h-full bg-blue-40">
+        <div className="flex justify-center items-center h-full bg-white">
             {props.affirmation}
         </div>
     );
