@@ -17,7 +17,8 @@ interface Widget {
 }
 
 /* this is the most simiplified version of what the generated code could be
-* please fix it but use the same outputs
+* please fix it but use the same outputs\
+* you need to call the api to get the config
 */
 
 export const generateWidgets = (props: Widget): React.ReactNode[] => {
