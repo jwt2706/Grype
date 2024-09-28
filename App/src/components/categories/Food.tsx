@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 import { GiChickenLeg } from "react-icons/gi";
 
 interface FoodProps {
@@ -9,10 +11,29 @@ interface FoodProps {
 */
 
 const Food = (props: FoodProps) => {
+    const foodRef = useRef<HTMLDivElement>(null);
+    const eatRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const foodElement = foodRef.current;
+        const eatElement = eatRef.current;
+
+        if (foodElement && eatElement) {
+            gsap.fromTo(foodElement, { y: -50, opacity: 0 }, { y: 0, opacity: 1, duration: 1 });
+
+            // @ozep i wanna make this shake three times then wait 0.5, then shake three times again.... but idk how to do those loops
+            gsap.fromTo(eatElement, { rotation: -10 }, { rotation: 10, duration: 0.1, yoyo: true, repeat: -1, ease: "power1.inOut" });
+        }
+    }, []);
+
     return (
-        <div className="flex justify-center items-center h-full bg-orange-200">
-            {props.food}
-            <GiChickenLeg />
+        <div className="flex justify-center items-center h-full bg-purple-400">
+            <div>
+                <div ref={foodRef} className="pb-8">{props.food}</div>
+                <div ref={eatRef}>
+                    <GiChickenLeg size={148} />
+                </div>
+            </div>
         </div>
     );
 }
