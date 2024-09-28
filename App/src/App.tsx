@@ -12,6 +12,7 @@ import { TextField } from '@mui/material'
 import { generateWidgets } from './utils/generateWidgets'
 import { CategoryType } from './types/Categories'
 import { Widget as WidgetType } from './types/Widget'
+import AnalyzingVoice from './components/categories/AnalyzingVoice'
 
 function App() {
     return (
@@ -78,17 +79,18 @@ const InitializeApp = (props: InitializeAppProps) => {
 
 const NonInitializedApp = () => {
     const [widget, setWidgets] = useState<React.ReactNode[]>([]);
+    const [configState, setConfigState] = useState<true | false | null>(true);
 
     useEffect(() => {
         if (!localStorage.getItem('config')) {
             const config = generateConfig();
             localStorage.setItem('config', JSON.stringify(config));
+            setConfigState(false)
         } else {
-            const config = JSON.parse(localStorage.getItem('config')!);
-            setWidgets(generateWidgets(config) as React.ReactNode[]);
+            setConfigState(true);
         }
-    }, []);
-
+    }, [configState]);
+ 
 
 
     useEffect(() => {
@@ -132,13 +134,17 @@ const NonInitializedApp = () => {
 
         setWidgets(newWidgets);
     }, []);
+
+    console.log(configState);
     return (
          /// start with the logic that collects the voice recording then transition to the widgets
         <>
+        {configState ? <AnalyzingVoice setWidgets={setWidgets} setConfigState={setConfigState} /> : 
           <Container>
               <VerticalCarousel slides={widget}>
               </VerticalCarousel>
-          </Container>  
+          </Container>
+    }
         </>
     );
 }
