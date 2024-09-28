@@ -15,5 +15,10 @@ export const CONFIG = {
     /**
     * @brief The time after which it is considered the end of day (military time)
     */
-    END_OF_DAY_TIME: 18
+    END_OF_DAY_TIME: 18,
+    /**
+    *
+    * @brief the minimum distance for a scroll to be conuted
+    */
+    MIN_PAN_FOR_SCROLL: 100,
 }
