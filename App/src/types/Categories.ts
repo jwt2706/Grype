@@ -4,3 +4,10 @@ export enum CategoryType {
     FOOD = "food",
     WATER = "water",
 }
+
+export const CategoryList = [
+    CategoryType.EXCERSIZE,
+    CategoryType.SOCIAL,
+    CategoryType.FOOD,
+    CategoryType.WATER,
+]

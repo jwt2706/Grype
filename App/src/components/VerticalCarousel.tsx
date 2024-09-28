@@ -9,8 +9,6 @@ interface VerticalCarouselProps {
 const VerticalCarousel = (props: VerticalCarouselProps) => {
     const [index, setIndex] = React.useState(0);
 
-    const currentSlide = props.slides[index];
-
     const onDragEnd = (event, info: PanInfo) => {
         // Flip the direction of the config since we're scrolling in -y direction
         if (info.offset.y <= -CONFIG.MIN_PAN_FOR_SCROLL && index < props.slides.length - 1) {
@@ -31,7 +29,7 @@ const VerticalCarousel = (props: VerticalCarouselProps) => {
                         >
                             {index == props.slides.length - 1 ?
                                 <div className="snap-y snap-mandatory snap-vertical">
-                                    {currentSlide}
+                                    {slide}
                                 </div>
 
                                 : <motion.div className="snap-y snap-mandatory snap-vertical"
@@ -44,7 +42,7 @@ const VerticalCarousel = (props: VerticalCarouselProps) => {
                                     }}
                                     onDragEnd={onDragEnd}
                                 >
-                                    {currentSlide}
+                                    {slide}
                                 </motion.div>
                             }
                         </motion.span>
