@@ -16,6 +16,10 @@ interface Widget {
     numberOfWidgets: number;
 }
 
+/* this is the most simiplified version of what the generated code could be
+* please fix it but use the same outputs
+*/
+
 export const generateWidgets = (props: Widget): React.ReactNode[] => {
     const widgets: React.ReactNode[] = [];
 
@@ -23,18 +27,30 @@ export const generateWidgets = (props: Widget): React.ReactNode[] => {
         const task = Math.floor(Math.random() * (4 + 1));
 
         if (task === 0) {
+            if (props.config[CategoryType.EXCERSIZE].length === 0) {
+                continue;
+            }
             const content = props.config[CategoryType.EXCERSIZE].splice(0,1)
             widgets.push(<Widget><Exercise exercise={content[0]} /></Widget>);
         }
         else if (task === 1) {
+            if (props.config[CategoryType.SOCIAL].length === 0) {
+                continue;
+            }
             const content = props.config[CategoryType.SOCIAL].splice(0,1)
             widgets.push(<Widget><Social social={content[0]} /></Widget>);
         }
         else if (task === 2) {
+            if (props.config[CategoryType.FOOD].length === 0) {
+                continue;
+            }
             const content = props.config[CategoryType.FOOD].splice(0,1)
             widgets.push(<Widget><Food food={content[0]} /></Widget>);
         }
         else if (task === 3) {
+            if (props.config[CategoryType.WATER].length === 0) {
+                continue;
+            }
             const content = props.config[CategoryType.WATER].splice(0,1)
             widgets.push(<Widget><Water water={content[0]} /></Widget>);
         }
