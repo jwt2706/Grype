@@ -40,7 +40,7 @@ const AppProvider = () => {
 interface InitializeAppProps {
     setName: (name: string) => void;
 }
-const InitializeApp = (props: InitializeAppProps) => {s
+const InitializeApp = (props: InitializeAppProps) => {
     return (
       <>
         <div className="inital h-full w-full">
