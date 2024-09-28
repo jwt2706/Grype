@@ -1,11 +1,20 @@
 import Layout from './Layout'
 import './App.css'
+import Widget from './components/Widget'
 
 function App() {
   return (
     <>
       <Layout>
-        <div>Hi</div>
+        <Widget>
+          <div>Hi</div>
+        </Widget>
+        <Widget>
+          <div>Hi</div>
+        </Widget>
+        <Widget>
+          <div>Hi</div>
+        </Widget>
       </Layout>
     </>
   )
