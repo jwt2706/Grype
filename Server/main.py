@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from transformers import AutoModelForSequenceClassification, AutoTokenizer
+from transformers import pipeline
 import torch
 
 app = Flask(__name__)
@@ -7,21 +7,9 @@ app = Flask(__name__)
 @app.route("/sentiment", methods=["POST"])
 def sentiment():
     input_text = request.json.get("text")
-
-    # load the mode
-    model_name = "distilbert-base-uncased-finetuned-sst-2-english"
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForSequenceClassification.from_pretrained(model_name)
-
-    # tokenize the input text
-    inputs = tokenizer(input_text, return_tensors="pt")
-
-    # analysis
-    outputs = model(**inputs)
-    logits = outputs.logits
-    predicted_label = torch.argmax(logits)
-
-    return {"sentiment": predicted_label.item()}
+    pipe = pipeline("text-classification")
+    result = pipe(input_text)
+    return result['score']
 
 @app.route("/summarize", methods=["POST"])
 def summarize():
