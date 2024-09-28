@@ -78,16 +78,8 @@ const NonInitializedApp = () => {
 
 
     useEffect(() => {
-        const slideData = ContentService.generateWidgets();
-        const newWidgets: JSX.Element[] = []
-
-        for (let i = 0; i < 4; i++) {
-            newWidgets.push(
-                <Widget>
-                    Slide {i} 
-                </Widget>
-            );
-        }
+        const newWidgets = generateConfig();
+        /*
 
         for (const slide of slideData) {
             if (slide instanceof EndOfDayWidgetData) {
@@ -114,7 +106,7 @@ const NonInitializedApp = () => {
             } else {
                 console.error("Unknown slide type", slide)
             }
-        }
+        }*/
 
         setWidgets(newWidgets);
     }, []);

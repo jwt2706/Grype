@@ -9,7 +9,7 @@ interface AffirmationProps {
 
 const Affirmation = (props: AffirmationProps) => {
     return (
-        <div className="text-2xl text-center">
+        <div className="flex justify-center items-center h-[90vh]">
             {props.affirmation}
         </div>
     );
