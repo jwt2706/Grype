@@ -8,7 +8,6 @@ import { EndOfDayWidgetData } from './types/EndOfDayWidgetData'
 import { SuggestionWidgetData } from './types/SuggestionWidgetData'
 import { EndWidgetData } from './types/EndWidgetData'
 import Container from './components/Container'
-import { TextField } from '@mui/material'
 import { generateWidgets } from './utils/generateWidgets'
 import { CategoryType } from './types/Categories'
 import { Widget as WidgetType } from './types/Widget'
@@ -111,7 +110,6 @@ const NonInitializedApp = () => {
         setWidgets(newWidgets);
     }, []);
 
-    console.log(configState);
     return (
          /// start with the logic that collects the voice recording then transition to the widgets
         <>
