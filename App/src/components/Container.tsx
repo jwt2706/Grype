@@ -7,7 +7,7 @@ interface ContainerProps {
 const Container = (props: ContainerProps) => {
     return (
         <>
-            <div className="border-2 border-solid border-gray-400 rounded-md p-4 w-full h-[99vh] text-black">
+            <div className="border-2 border-solid border-gray-400 bg-black rounded-md p-4 w-full h-[99vh] text-black">
                 {props.children}
             </div>
         </>

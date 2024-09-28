@@ -1,4 +1,3 @@
-
 export const CONFIG = {
     /**
      * @brief Height divided by width
@@ -17,8 +16,12 @@ export const CONFIG = {
     */
     END_OF_DAY_TIME: 18,
     /**
-    *
     * @brief the minimum distance for a scroll to be conuted
     */
     MIN_PAN_FOR_SCROLL: 100,
+
+    /**
+     * @brief Where the backend is hosted
+     */
+    BACKEND_HOST: window.location.origin,
 }

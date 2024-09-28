@@ -1,17 +1,10 @@
 import Layout from './Layout'
 import './App.css'
-import Widget from './components/Widget'
 import VerticalCarousel from './components/VerticalCarousel'
 import { useEffect, useState } from 'react'
-import { ContentService } from './services/ContentService'
-import { EndOfDayWidgetData } from './types/EndOfDayWidgetData'
-import { SuggestionWidgetData } from './types/SuggestionWidgetData'
-import { EndWidgetData } from './types/EndWidgetData'
 import Container from './components/Container'
-import { TextField } from '@mui/material'
 import { generateWidgets } from './utils/generateWidgets'
 import { CategoryType } from './types/Categories'
-import { Widget as WidgetType } from './types/Widget'
 import AnalyzingVoice from './components/categories/AnalyzingVoice'
 import Initialization from './Initialization'
 
@@ -48,8 +41,6 @@ interface InitializeAppProps {
     setName: (name: string) => void;
 }
 const InitializeApp = (props: InitializeAppProps) => {
-    const [username, setUsername] = useState<string | null>(null);
-    // animate this 
     return (
       <>
         <div className="inital h-full w-full">
@@ -78,16 +69,8 @@ const NonInitializedApp = () => {
 
 
     useEffect(() => {
-        const slideData = ContentService.generateWidgets();
-        const newWidgets: JSX.Element[] = []
-
-        for (let i = 0; i < 4; i++) {
-            newWidgets.push(
-                <Widget>
-                    Slide {i} 
-                </Widget>
-            );
-        }
+        const newWidgets = generateConfig();
+        /*
 
         for (const slide of slideData) {
             if (slide instanceof EndOfDayWidgetData) {
@@ -114,16 +97,15 @@ const NonInitializedApp = () => {
             } else {
                 console.error("Unknown slide type", slide)
             }
-        }
+        }*/
 
         setWidgets(newWidgets);
     }, []);
 
-    console.log(configState);
     return (
          /// start with the logic that collects the voice recording then transition to the widgets
         <>
-        {configState ? <AnalyzingVoice setWidgets={setWidgets} setConfigState={setConfigState} /> : 
+        {configState ? <AnalyzingVoice setConfigState={setConfigState} /> : 
           <Container>
               <VerticalCarousel slides={widget}>
               </VerticalCarousel>
@@ -141,9 +123,9 @@ function generateConfig() {
         [CategoryType.WATER]: ['Drink a glass of water', 'Have some herbal tea', 'Stay hydrated']
     };
 
-    const widgetData: WidgetType = {
+    const widgetData = {
         config: widgetConfig,
-        numberOfWidgets: 10
+        numberOfWidgets: 30
     };
 
     const config = generateWidgets(widgetData);

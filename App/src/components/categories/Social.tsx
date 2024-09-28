@@ -10,7 +10,7 @@ interface SocialProps {
 
 const Social = (props: SocialProps) => {
     return (
-        <div className="text-2xl text-center">
+        <div className="flex justify-center items-center h-full bg-yellow-200">
             {props.social}
             <IoPeople />
         </div>
