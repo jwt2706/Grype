@@ -2,6 +2,7 @@ import Layout from './Layout'
 import './App.css'
 import Widget from './components/Widget'
 import VerticalCarousel from './components/VerticalCarousel'
+import Container from './components/Container'
 
 function App() {
 
@@ -28,8 +29,9 @@ function App() {
   return (
     <>
       <Layout>
-        <VerticalCarousel slides={slides}>
-        </VerticalCarousel>
+        <Container>
+        <VerticalCarousel slides={slides}></VerticalCarousel>
+        </Container>
       </Layout>
     </>
   )
