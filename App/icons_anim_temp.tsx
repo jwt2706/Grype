@@ -1,5 +1,14 @@
 
 import react from '@vitejs/plugin-react'
+import { useRef } from 'react';
+
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(useGSAP);
+
+const container = useRef();
+
 
 // Icon for exercise
 import { BiBody } from "react-icons/bi";
