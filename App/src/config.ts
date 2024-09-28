@@ -23,5 +23,5 @@ export const CONFIG = {
     /**
      * @brief Where the backend is hosted
      */
-    BACKEND_HOST: window.location.origin,
+    BACKEND_HOST: `http://${window.location.hostname}:5000`,
 }

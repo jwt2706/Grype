@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { CONFIG } from '../../config';
 import { CategoryList } from '../../types/Categories';
+import { AudioRecorder } from '../../services/AudioService';
 
 interface AnalyzingVoiceProps {
     setConfigState: (configState: boolean) => void;
@@ -11,59 +12,14 @@ const AnalyzingVoice = (props: AnalyzingVoiceProps) => {
     const [categoryIndex, setCategoryIndex] = useState<number>(0);
     const [done, setDone] = useState<boolean>(false);
 
+    const recorder = new AudioRecorder();
+
     function startRecording() {
-        if (done) return;
-        setRecording(true);
+        recorder.startAudioRecording()
 
-        try {
-
-            // TS is just wrong (except on firefox). Also var is used because we want to hoiste out of the try
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            // eslint-disable-next-line no-var
-            var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
-            recognition.lang = 'en-US';
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        } catch (_) {
-            alert("Browser not supported");
-            setRecording(false);
-
-            return;
-        }
-
-        recognition.onresult = async (event: any) => {
-            const transcript = event.results[0][0].transcript;
-            console.log(transcript)
-
-            try {
-
-                const response = await fetch(`${CONFIG.BACKEND_HOST}/analyze`, {
-                    method: "POST",
-                    body: JSON.stringify({ text: transcript })
-                })
-
-                const sentiment: number = (await response.json()).goal_status;
-
-                console.log(CategoryList[categoryIndex], sentiment)
-                if (categoryIndex == CategoryList.length - 1) {
-                    setDone(true);
-                    return;
-                }
-
-                setCategoryIndex(categoryIndex + 1);
-
-            } catch (e) {
-                console.error(e);
-
-                setRecording(false);
-            }
-        }
-
-        recognition.onend = () =>{
-            setRecording(false);
-        }
-
-        recognition.start();
+        setTimeout(()=> {
+            recorder.finishAudioRecording().then(sentiment => console.log("Sentiment: ", sentiment))
+        }, 10*1000)
     }
 
     if (done) {
