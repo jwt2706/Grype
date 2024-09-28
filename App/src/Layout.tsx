@@ -21,7 +21,7 @@ const Layout = (props: LayoutProps) => {
 
 
     return (
-        <span id="main-app" className="overflow-hidden">
+        <span id="main-app" className="overflow-hidden bg-black">
             {props.children}
         </span>
     );

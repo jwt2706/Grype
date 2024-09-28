@@ -8,7 +8,7 @@ interface WaterProps {
 
 const Water = (props: WaterProps) => {
     return (
-        <div className="flex justify-center items-center h-[90vh]">
+        <div className="flex justify-center items-center h-full bg-blue-400">
             {props.water}
         </div>
     );
