@@ -13,12 +13,43 @@
     position: absolute;
     top: 0px;
     left: var(--container-padding);
-    background-color: white; /* Temp for testing, do delete when it causes issues*/
+    background-color: lightblue; /* Temp for testing, do delete when it causes issues*/
     width: var(--container-width);
     height: var(--container-height);
     padding: 5px;
 }
 
+.snap-vertical {
+  scroll-snap-points-y: repeat(100vh);
+}
 
+.inital {
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  line-height: var(--container-height)/2;
+  background-color: #1a1a1a;
+}
 
+.typewriter h1 {
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
 
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
+}
