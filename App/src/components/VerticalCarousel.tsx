@@ -2,7 +2,6 @@ import React from "react";
 
 interface VerticalCarouselProps {
     slides: React.ReactNode[];
-
 }
 
 const VerticalCarousel = (props: VerticalCarouselProps) => { 

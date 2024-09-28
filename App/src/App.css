@@ -13,7 +13,7 @@
     position: absolute;
     top: 0px;
     left: var(--container-padding);
-    background-color: white; /* Temp for testing, do delete when it causes issues*/
+    background-color: lightblue; /* Temp for testing, do delete when it causes issues*/
     width: var(--container-width);
     height: var(--container-height);
     padding: 5px;

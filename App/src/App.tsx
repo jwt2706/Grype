@@ -2,37 +2,57 @@ import Layout from './Layout'
 import './App.css'
 import Widget from './components/Widget'
 import VerticalCarousel from './components/VerticalCarousel'
+import { useEffect, useState } from 'react'
+import { ContentService } from './services/ContentService'
+import { EndOfDayWidgetData } from './types/EndOfDayWidgetData'
+import { SuggestionWidgetData } from './types/SuggestionWidgetData'
+import { EndWidgetData } from './types/EndWidgetData'
 
 function App() {
+    const [widget, setWidgets] = useState<JSX.Element[]>([]);
 
-  const slides = [
-        <Widget>
-          <h1>Slide 1</h1>
-        </Widget>,
-        <Widget>
-          <h1>Slide 2</h1>
-        </Widget>,
-        <Widget>
-          <h1>Slide 3</h1>
-        </Widget>,
-        <Widget>
-        <h1>Slide 1</h1>
-      </Widget>,
-      <Widget>
-        <h1>Slide 2</h1>
-      </Widget>,
-      <Widget>
-        <h1>Slide 3</h1>
-      </Widget>
-      ]
-  return (
-    <>
-      <Layout>
-        <VerticalCarousel slides={slides}>
-        </VerticalCarousel>
-      </Layout>
-    </>
-  )
+    useEffect(() => {
+        const slideData = ContentService.generateWidgets();
+        const newWidgets: JSX.Element[] = []
+
+        for (const slide of slideData) {
+            if (slide instanceof EndOfDayWidgetData) {
+                newWidgets.push(
+                    <Widget>
+                        End of day Widget
+                    </Widget>
+                );
+            }
+            else if (slide instanceof SuggestionWidgetData) {
+                newWidgets.push(
+                    <Widget>
+                        Suggestion: {slide.suggestion}
+                    </Widget>
+                );
+            }
+
+            else if (slide instanceof EndWidgetData) {
+                newWidgets.push(
+                    <Widget>
+                        There are no more wigets :(
+                    </Widget>
+                );
+            } else {
+                console.error("Unknown slide type", slide)
+            }
+        }
+
+        setWidgets(newWidgets);
+    }, [])
+
+    return (
+        <>
+            <Layout>
+                <VerticalCarousel slides={widget}>
+                </VerticalCarousel>
+            </Layout>
+        </>
+    )
 }
 
 export default App
