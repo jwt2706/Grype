@@ -12,6 +12,24 @@ if (workbox) {
     ({ url }) => url.pathname.endsWith('.html'),
     new workbox.strategies.NetworkFirst()
   );
+
+  workbox.routing.registerRoute(
+    ({ url }) => url.pathname.endsWith('.css') || url.pathname.endsWith('.js'),
+    new workbox.strategies.StaleWhileRevalidate()
+  );
+
+  workbox.routing.registerRoute(
+    ({ url }) => url.pathname.endsWith('.png') || url.pathname.endsWith('.jpg'),
+    new workbox.strategies.CacheFirst()
+  );
+
+  self.addEventListener('fetch', (event) => {
+    event.respondWith(
+      caches.match(event.request).then((response) => {
+        return response || fetch(event.request);
+      })
+    );
+  });
 } else {
   console.log(`Workbox didn't load`);
 }
