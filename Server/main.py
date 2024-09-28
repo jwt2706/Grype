@@ -1,44 +1,34 @@
 from flask import Flask, request, jsonify
-from transformers import AutoModelForSequenceClassification, AutoTokenizer
+from transformers import pipeline
 import torch
 
 app = Flask(__name__)
 
-@app.route("/sentiment", methods=["POST"])
-def sentiment():
+goal_categories = ['exercise', 'diet', 'hydration', 'hygiene', 'social', 'sleep', 'production', 'misc']
+sentence_classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
+goal_status_pipe = pipeline("sentiment-analysis", model="distilbert/distilbert-base-uncased-finetuned-sst-2-english")
+
+@app.route("/analyze", methods=["POST"])
+def analyze():
     input_text = request.json.get("text")
+    sentences = split_sentences(input_text)
+    classified_sentences = []
+    for sentence in sentences:
+        goal_type = classify_sentence(sentence)
+        goal_status = classify_goal_status(sentence)
+        classified_sentences.append({"sentence": sentence, "goal_type": goal_type, "goal_status": goal_status})
+    return classified_sentences
 
-    # load the mode
-    model_name = "distilbert-base-uncased-finetuned-sst-2-english"
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForSequenceClassification.from_pretrained(model_name)
+def split_sentences(text):
+    return text.split(".")
 
-    # tokenize the input text
-    inputs = tokenizer(input_text, return_tensors="pt")
+def classify_sentence(sentence):
+    result = sentence_classifier(sentence, goal_categories)
+    return result['labels'][0]
 
-    # analysis
-    outputs = model(**inputs)
-    logits = outputs.logits
-    predicted_label = torch.argmax(logits)
-
-    return {"sentiment": predicted_label.item()}
-
-@app.route("/summarize", methods=["POST"])
-def summarize():
-    input_text = request.json.get("text")
-
-    model = BertSummarizer.from_pretrained('bert-base-uncased')
-    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-    inputs = tokenizer.encode_plus(input_text, return_tensors='pt', max_length=512, truncation=True)
-    summary_ids = model.generate(inputs['input_ids'], num_beams=4, max_length=200)
-    summary_text = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
-    return summary_text
-
-
-# if this works. have a way to make python script to download all the models we need
-# then make this just load the right model from the local
-
-
+def classify_goal_status(sentence):
+    result = goal_status_pipe(sentence)
+    return result[0]['label']
 
 if __name__ == "__main__":
     app.run(debug=True)
