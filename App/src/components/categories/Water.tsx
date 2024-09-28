@@ -1,16 +1,9 @@
-<<<<<<< HEAD
-import { LuGlassWater } from "react-icons/lu";
-
-interface WaterProps {
-    water: string;
-=======
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import Drink from "../icons/Drink";
 
 interface FoodProps {
     drink: string;
->>>>>>> main
 }
 
 const Water = (props: FoodProps) => {
@@ -28,11 +21,6 @@ const Water = (props: FoodProps) => {
     }, []);
 
     return (
-<<<<<<< HEAD
-        <div className="flex justify-center items-center h-[90vh]">
-            {props.water}
-            <LuGlassWater />
-=======
         <div className="flex justify-center items-center h-full bg-blue-200">
             <div>
                 <div ref={waterRef} className="pb-8">{props.drink}</div>
@@ -40,7 +28,6 @@ const Water = (props: FoodProps) => {
                     <Drink />
                 </div>
             </div>
->>>>>>> main
         </div>
     );
 }
