@@ -82,6 +82,10 @@ const AnalyzingVoice = (props: AnalyzingVoiceProps) => {
             <button onClick={() => {
                 if (!recording) startRecording();
             }}>{recording ? "Currently recording" : "Start Recording"}</button>
+            <button onClick={() => {
+                localStorage.setItem("config", "");
+                props.setConfigState(false);
+            }}>Skip</button>
         </div>
     );
 };
