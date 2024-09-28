@@ -1,13 +1,4 @@
-
-/**
- * @brief Height divided by width
- */
-const TARGET_ASPECT_RATIO = 19 / 10;
-
-/**
- * @brief The minimum ratio where if it's over it, just roll with it
- */
-const ACCEPTABLE_RATIO = 19 / 12;
+import { CONFIG } from "../config";
 
 /**
  * Width: The width that you should hardcode the app to run as
@@ -30,7 +21,7 @@ export function calculateAspectRatio(): AspectRatio {
 
     const currentRatio = height / width;
 
-    if (currentRatio > ACCEPTABLE_RATIO) {
+    if (currentRatio > CONFIG.ACCEPTABLE_RATIO) {
         return {
             height,
             width,
@@ -38,7 +29,7 @@ export function calculateAspectRatio(): AspectRatio {
         }
     }
 
-    const desiredWidth = Math.floor((height / TARGET_ASPECT_RATIO) / 2) * 2;
+    const desiredWidth = Math.floor((height / CONFIG.TARGET_ASPECT_RATIO) / 2) * 2;
 
     const desiredPadding = (width - desiredWidth) / 2;
 
