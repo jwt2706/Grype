@@ -46,9 +46,7 @@ const AppProvider = () => {
 interface InitializeAppProps {
     setName: (name: string) => void;
 }
-const InitializeApp = (props: InitializeAppProps) => {
-    const [username, setUsername] = useState<string | null>(null);
-    // animate this 
+const InitializeApp = (props: InitializeAppProps) => {s
     return (
       <>
         <div className="inital h-full w-full">
@@ -133,7 +131,7 @@ function generateConfig() {
 
     const widgetData: WidgetType = {
         config: widgetConfig,
-        numberOfWidgets: 10
+        numberOfWidgets: 30
     };
 
     const config = generateWidgets(widgetData);
