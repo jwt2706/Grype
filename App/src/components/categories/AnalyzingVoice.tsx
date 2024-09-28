@@ -15,9 +15,11 @@ const AnalyzingVoice = (props: AnalyzingVoiceProps) => {
 
     return (
         <div className="flex justify-center items-center h-[90vh]">
+            <div>
             <h1>Analyzing Voice</h1>
             <p>This component is responsible for analyzing voice data.</p>
             <button onClick={onConfigGeneration}></button>
+            </div>
         </div>
     );
 };
