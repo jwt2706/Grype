@@ -11,11 +11,11 @@ Revolutionize your habit tracking with growth stimulating byte sized AI suggesti
 Imagine having a personal assistant that helps you set and achieve your goals, using the power of AI to provide personalized suggestions and motivation. Welcome to Grype, a cutting-edge web application that combines speech recognition, natural language processing, and machine learning to help you reach your full potential.
 
 With Grype, you'll enjoy a unique and interactive experience that helps you:
+1. Set and track your goals with ease
+2. Receive personalized suggestions and recommendations based on your input
+3. Stay Gryped with inspiring quotes and messages
+4. Celebrate your successes and learn from your setbacks
 
-Set and track your goals with ease
-Receive personalized suggestions and recommendations based on your input
-Stay Gryped with inspiring quotes and messages
-Celebrate your successes and learn from your setbacks
 Whether you're looking to improve your productivity, achieve a specific goal, or simply need a boost of motivation, Grype is here to help. Try it out today and discover a more focused, driven, and successful you!
 
 # Prerequisites
