@@ -53,6 +53,7 @@ const Initialization: React.FC<InitializationProps> = (props) => {
                             sx={{ input: { color: 'white', textAlign: 'center' } }}
                             id="standard-basic"
                             placeholder="someone special <3"
+                            defaultValue="Honey"
                             variant="standard"
                             onChange={(e) => {
                                 setUsername(e.target.value);
