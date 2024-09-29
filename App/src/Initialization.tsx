@@ -36,6 +36,7 @@ const Initialization: React.FC<InitializationProps> = (props) => {
                     );
                 },
             });
+            setUsername("Honey");
             setHasClicked(true);
         }
     };
@@ -65,6 +66,7 @@ const Initialization: React.FC<InitializationProps> = (props) => {
                             className={`mt-5 font-bold py-2 px-4 rounded ${username ? 'bg-blue-500 hover:bg-blue-700 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
                             onClick={() => {
                                 if (username && username.length > 0) {
+                                    localStorage.setItem('name', username);
                                     props.setName(username);
                                 }
                             }}

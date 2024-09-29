@@ -8,7 +8,7 @@ import Affirmation from "../components/categories/Affirmation";
 
 export interface Widget {
     config: {
-        [CategoryType.EXCERSIZE]: string[];
+        [CategoryType.EXERCISE]: string[];
         [CategoryType.SOCIAL]: string[];
         [CategoryType.FOOD]: string[];
         [CategoryType.WATER]: string[];
@@ -28,10 +28,10 @@ export const generateWidgets = (props: Widget): React.ReactNode[] => {
         const task = Math.floor(Math.random() * (4 + 1));
 
         if (task === 0) {
-            if (props.config[CategoryType.EXCERSIZE].length === 0) {
+            if (props.config[CategoryType.EXERCISE].length === 0) {
                 continue;
             }
-            const content = props.config[CategoryType.EXCERSIZE].splice(0,1)
+            const content = props.config[CategoryType.EXERCISE].splice(0,1)
             widgets.push(<Widget><Exercise exercise={content[0]} /></Widget>);
         }
         else if (task === 1) {
