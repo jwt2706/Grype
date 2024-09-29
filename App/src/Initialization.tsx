@@ -16,6 +16,8 @@ const Initialization: React.FC<InitializationProps> = (props) => {
             { opacity: 0, scale: 0 },
             { opacity: 1, scale: 1, duration: 1, ease: "back.out(1.7)" }
         );
+
+        setUsername("honey"); // hardcoding for the demo
     }, []);
 
     const [hasClicked, setHasClicked] = useState(false);
@@ -53,7 +55,7 @@ const Initialization: React.FC<InitializationProps> = (props) => {
                             sx={{ input: { color: 'white', textAlign: 'center' } }}
                             id="standard-basic"
                             placeholder="someone special <3"
-                            defaultValue="Honey"
+                            defaultValue="Honey"  // hardcoding for the demo
                             variant="standard"
                             onChange={(e) => {
                                 setUsername(e.target.value);
