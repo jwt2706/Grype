@@ -18,6 +18,8 @@ With Grype, you'll enjoy a unique and interactive experience that helps you:
 
 Whether you're looking to improve your productivity, achieve a specific goal, or simply need a boost of motivation, Grype is here to help. Try it out today and discover a more focused, driven, and successful you!
 
+[DEVPOST](https://devpost.com/software/grype)
+
 # Prerequisites
 - Python 3
 - NodeJS 22
