@@ -117,7 +117,7 @@ const NonInitializedApp = () => {
 
 function generateConfig() {
     const widgetConfig = {
-        [CategoryType.EXCERSIZE]: ['Run', 'Yoga', 'Gym'],
+        [CategoryType.EXERCISE]: ['Run', 'Yoga', 'Gym'],
         [CategoryType.SOCIAL]: ['Call a friend', 'Join a club', 'Attend a meetup'],
         [CategoryType.FOOD]: ['Eat a salad', 'Try a new recipe', 'Have a smoothie'],
         [CategoryType.WATER]: ['Drink a glass of water', 'Have some herbal tea', 'Stay hydrated']
