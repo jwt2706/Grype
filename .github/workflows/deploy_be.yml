@@ -1,4 +1,4 @@
-name: Deploy backend
+name: Deploy
 
 on:
   push:
@@ -7,19 +7,26 @@ on:
 
 jobs:
   deploy:
-    runs-on: macos-latest
-
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Vercel CLI
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22'
+
+      - name: Build Server
         run: |
-          cd Server/
           npm i -g vercel
 
-      - name: Build
-        run: npm install && npm run build
+      - name: Install dependencies
+        run: |
+          cd Server
+          pip install -r requirements.txt
 
-      - name: Deploy to Vercel
-        run: vercel --token ${{ secrets.VERCEL_TOKEN }} --prod --yes --name grype
+      - name: Deploy Server to Vercel
+        run: |
+          npx vercel build --token $VERCEL_TOKEN --dir .
+          npx vercel deploy --token $VERCEL_TOKEN --dir .
