@@ -24,4 +24,9 @@ export const CONFIG = {
      * @brief Where the backend is hosted
      */
     BACKEND_HOST: `http://${window.location.hostname}:5000`,
+
+    /**
+     * @brief The time until we force stop recording
+     */
+    VOICE_RECORDING_MAX_DURATION: 25*1000
 }
