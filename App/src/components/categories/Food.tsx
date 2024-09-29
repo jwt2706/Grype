@@ -19,7 +19,7 @@ const Food = (props: FoodProps) => {
         const eatElement = eatRef.current;
 
         if (foodElement && eatElement) {
-            gsap.fromTo(foodElement, { y: -50, opacity: 0 }, { y: 0, opacity: 1, duration: 1 });
+            gsap.fromTo(foodElement, { scale: 0 }, { scale: 1, duration: 1, ease: "elastic.out(1, 0.3)" });
 
             const shakeAnimation = () => {
                 return gsap.fromTo(eatElement, 
@@ -42,7 +42,7 @@ const Food = (props: FoodProps) => {
         <div className="flex justify-center items-center h-full bg-purple-400">
             <div>
                 <div ref={foodRef} className="pb-8">{props.food}</div>
-                <div ref={eatRef}>
+                <div ref={eatRef} className="flex justify-center items-center">
                     <GiChickenLeg size={148} />
                 </div>
             </div>

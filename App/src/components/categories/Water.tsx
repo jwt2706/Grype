@@ -24,7 +24,7 @@ const Water = (props: FoodProps) => {
         <div className="flex justify-center items-center h-full bg-blue-200">
             <div>
                 <div ref={waterRef} className="pb-8">{props.drink}</div>
-                <div ref={drinkRef}>
+                <div ref={drinkRef} className="flex justify-center items-center">
                     <Drink />
                 </div>
             </div>

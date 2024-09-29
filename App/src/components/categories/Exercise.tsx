@@ -27,12 +27,10 @@ const Exercise = (props: ExerciseProps) => {
 
 
     return (
-        <div className="flex justify-center items-center h-full bg-purple-400">
-            <div>
-                <div ref={personRef} className="pb-8">{props.exercise}</div>
-                <div ref={exerciseRef}>
-                    <GiWeightLiftingUp size={148} />
-                </div>
+        <div className="flex flex-col justify-center items-center h-full bg-purple-400">
+            <div ref={personRef} className="pb-8">{props.exercise}</div>
+            <div ref={exerciseRef} className="flex justify-center items-center">
+                <GiWeightLiftingUp size={148} />
             </div>
         </div>
     );
