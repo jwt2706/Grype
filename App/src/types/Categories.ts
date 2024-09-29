@@ -4,6 +4,9 @@ export enum CategoryType {
     FOOD = "food",
     WATER = "water",
     SLEEP = "sleep",
+    PRODUCTIVITY = "productivity",
+    HYGENE = "hygene",
+    LEARNING = "learning"
 }
 
 export const CategoryList = [
@@ -11,5 +14,8 @@ export const CategoryList = [
     CategoryType.SOCIAL,
     CategoryType.FOOD,
     CategoryType.WATER,
-    CategoryType.SLEEP
+    CategoryType.SLEEP,
+    CategoryType.PRODUCTIVITY,
+    CategoryType.HYGENE,
+    CategoryType.LEARNING
 ]

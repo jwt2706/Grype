@@ -10,7 +10,7 @@ app = Flask(__name__)
 CORS(app)
 model = whisper.load_model("tiny")
 
-goal_categories = ['exercise', 'food', 'water', 'social', "sleep"]
+goal_categories = ['exercise', 'food', 'water', 'social', "sleep", "learning", "hygene", "productivity"]
 sentence_classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
 goal_status_pipe = pipeline("sentiment-analysis", model="distilbert/distilbert-base-uncased-finetuned-sst-2-english")
 
@@ -90,7 +90,10 @@ suggestions = {
         "Enjoy iced herbal teas",
         "Try homemade flavored water",
         "Start your day with a glass of water in the morning"
-    ]
+    ],
+    "learning": ["Read a book"],
+    "productivity": ["Plan ahead"],
+    "hygene": ["Brush your teeth"]
 }
 
 # Expects { topics: string[], count: number}
