@@ -1,0 +1,25 @@
+name: Deploy backend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Vercel CLI
+        run: |
+          cd Server/
+          npm i -g vercel
+
+      - name: Build
+        run: npm install && npm run build
+
+      - name: Deploy to Vercel
+        run: vercel --token ${{ secrets.VERCEL_TOKEN }} --prod --yes --name grype
