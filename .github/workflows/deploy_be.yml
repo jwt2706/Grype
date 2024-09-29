@@ -28,5 +28,5 @@ jobs:
 
       - name: Deploy Server to Vercel
         run: |
-          npx vercel build --token $VERCEL_TOKEN --dir .
-          npx vercel deploy --token $VERCEL_TOKEN --dir .
+          npx vercel build --token $VERCEL_TOKEN --dir ./Server
+          npx vercel deploy --token $VERCEL_TOKEN --dir ./Server
