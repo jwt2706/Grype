@@ -1,4 +1,4 @@
-name: Deploy Main
+name: Deploy frontend
 
 on:
   push:
@@ -13,11 +13,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Vercel CLI
-        run: npm i -g vercel
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22'
 
-      - name: Build
-        run: npm install && npm run build
+      - name: Build project
+        run: |
+          cd App
+          npm i
+          npm run build
 
-      - name: Deploy to Vercel
-        run: vercel --token ${{ secrets.VERCEL_TOKEN }} --prod --yes --name grype
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
