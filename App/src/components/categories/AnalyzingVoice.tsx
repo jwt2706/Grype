@@ -14,22 +14,22 @@ const AnalyzingVoice = (props: AnalyzingVoiceProps) => {
     const [done, setDone] = useState<boolean>(false);
     const [processing, setProcessing] = useState<boolean>(false);
     const recorder = useRef(new AudioRecorder());
+    const stopRecordingTimeout = useRef(0);
 
     useEffect(() => {
         gsap.fromTo(".category-text", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 1 });
     }, [categoryIndex]);
-    
+
     useEffect(() => {
         gsap.fromTo(".prompt-text", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 1 });
     }, []);
 
-    let stopRecordingTimeout;
 
     function startRecording() {
         setRecording(true)
         try {
             recorder.current.startAudioRecording()
-            stopRecordingTimeout = setTimeout(() => stopRecording(), CONFIG.VOICE_RECORDING_MAX_DURATION)
+            stopRecordingTimeout.current = setTimeout(() => stopRecording(), CONFIG.VOICE_RECORDING_MAX_DURATION)
         }
         catch (_) {
             setRecording(false)
@@ -39,7 +39,7 @@ const AnalyzingVoice = (props: AnalyzingVoiceProps) => {
     function stopRecording() {
         setRecording(false)
         setProcessing(true)
-        clearTimeout(stopRecordingTimeout);
+        clearTimeout(stopRecordingTimeout.current);
         recorder.current.finishAudioRecording().then(sentiment => {
             console.log("Sentiment: ", sentiment)
             alert("Voice processing complete, sentiment: " + (sentiment == 1 ? "Positive" : "Negative"));
@@ -68,22 +68,22 @@ const AnalyzingVoice = (props: AnalyzingVoiceProps) => {
             <div>
                 <div className='p-4 pb-5'>
                     <div className='prompt-text'>Please tell me about how this topic affected your day {window.localStorage.getItem("name")}: </div>
-                    <div className={`p-4 category-text ${colorOfCategory(CategoryList[categoryIndex])}`}>{CategoryList[categoryIndex]}</div>
+                    <div className={`p-4 category-text text-2xl capitalize ${colorOfCategory(CategoryList[categoryIndex])}`}>{CategoryList[categoryIndex]}</div>
                 </div>
                 <div className='pb-5'>
-                <button onClick={() => {
-                    if (!recording) startRecording();
-                    else stopRecording();
-                }}>{processing ? "Processing input!" : recording ? "Currently recording" : "Start Recording"}</button>
+                    <button className={` ${colorOfRecordButton(processing, recording)} `} onClick={() => {
+                        if (!recording) startRecording();
+                        else stopRecording();
+                    }}>{processing ? "Processing input!" : recording ? "Currently recording" : "Start Recording"}</button>
                 </div>
                 <button onClick={() => {
                     localStorage.setItem("config", "");
                     props.setConfigState(false);
                 }}>Skip</button>
-                <div className="p-5 text-gray-500 mt-20">
+                <div className="p-5 text-gray-500 mt-48">
                     Revolutionize your habit tracking with growth stimulating byte sized AI suggestions!
                     <div className="pt-2 text-sm">
-                    <a href="https://devpost.com/software/grype" target="_blank" >For more information</a>
+                        <a href="https://devpost.com/software/grype" target="_blank" >For more information</a>
                     </div>
                 </div>
             </div>
@@ -107,4 +107,16 @@ const colorOfCategory = (category: string) => {
         default:
             return "text-white";
     }
+}
+
+const colorOfRecordButton = (processing: boolean, recording: boolean) => {
+    if (processing) {
+        return "bg-yellow-300 text-slate-950";
+    }
+
+    if (recording) {
+        return "bg-red-600";
+    }
+
+    return "bg-lime-600";
 }
