@@ -30,6 +30,8 @@ const AppProvider = () => {
         setOnInitialLoad(false);
       }
     }, [name])
+
+    console.log(name)
     return (
         <>
             { onInitialLoad ? <InitializeApp setName={setName} /> : <NonInitializedApp /> }

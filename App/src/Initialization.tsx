@@ -16,8 +16,6 @@ const Initialization: React.FC<InitializationProps> = (props) => {
             { opacity: 0, scale: 0 },
             { opacity: 1, scale: 1, duration: 1, ease: "back.out(1.7)" }
         );
-
-        setUsername("honey"); // hardcoding for the demo
     }, []);
 
     const [hasClicked, setHasClicked] = useState(false);
@@ -38,6 +36,7 @@ const Initialization: React.FC<InitializationProps> = (props) => {
                     );
                 },
             });
+            setUsername("Honey");
             setHasClicked(true);
         }
     };
@@ -55,7 +54,6 @@ const Initialization: React.FC<InitializationProps> = (props) => {
                             sx={{ input: { color: 'white', textAlign: 'center' } }}
                             id="standard-basic"
                             placeholder="someone special <3"
-                            defaultValue="Honey"  // hardcoding for the demo
                             variant="standard"
                             onChange={(e) => {
                                 setUsername(e.target.value);
@@ -68,6 +66,7 @@ const Initialization: React.FC<InitializationProps> = (props) => {
                             className={`mt-5 font-bold py-2 px-4 rounded ${username ? 'bg-blue-500 hover:bg-blue-700 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
                             onClick={() => {
                                 if (username && username.length > 0) {
+                                    localStorage.setItem('name', username);
                                     props.setName(username);
                                 }
                             }}
