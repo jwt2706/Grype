@@ -27,7 +27,7 @@ const Exercise = (props: ExerciseProps) => {
 
 
     return (
-        <div className="flex flex-col justify-center items-center h-full bg-purple-400">
+        <div className="flex flex-col justify-center items-center h-full bg-teal-300">
             <div ref={personRef} className="pb-8">{props.exercise}</div>
             <div ref={exerciseRef} className="flex justify-center items-center">
                 <GiWeightLiftingUp size={148} />

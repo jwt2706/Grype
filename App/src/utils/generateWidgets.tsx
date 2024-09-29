@@ -1,21 +1,17 @@
-import { CategoryType } from "../types/Categories";
+import { CategoryList, CategoryType } from "../types/Categories";
 import Exercise from "../components/categories/Exercise";
 import Food from "../components/categories/Food";
 import Social from "../components/categories/Social";
 import Water from "../components/categories/Water";
 import Widget from "../components/Widget";
+import Sleep from "../components/categories/Sleep";
 import Affirmation from "../components/categories/Affirmation";
 import EndCard from "../components/categories/EndCard"
 import { Affirmations } from "./constants";
 
 export interface Widget {
-    config: {
-        [CategoryType.EXERCISE]: string[];
-        [CategoryType.SOCIAL]: string[];
-        [CategoryType.FOOD]: string[];
-        [CategoryType.WATER]: string[];
-    },
-    numberOfWidgets: number;
+    config: Record<CategoryType, string[]>,
+    numberOfWidgets: number
 }
 
 /* this is the most simiplified version of what the generated code could be
@@ -27,35 +23,47 @@ export const generateWidgets = (props: Widget): React.ReactNode[] => {
     const widgets: React.ReactNode[] = [];
 
     for (let i = 0; i < props.numberOfWidgets; i++) {
-        const task = Math.floor(Math.random() * (4 + 1));
+        const task = Math.floor(Math.random() * (CategoryList.length + 1));
 
         if (task === 0) {
             if (props.config[CategoryType.EXERCISE].length === 0) {
+                i--;
                 continue;
             }
-            const content = props.config[CategoryType.EXERCISE].splice(0,1)
+            const content = props.config[CategoryType.EXERCISE].splice(0, 1)
             widgets.push(<Widget><Exercise exercise={content[0]} /></Widget>);
         }
         else if (task === 1) {
             if (props.config[CategoryType.SOCIAL].length === 0) {
+                i--;
                 continue;
             }
-            const content = props.config[CategoryType.SOCIAL].splice(0,1)
+            const content = props.config[CategoryType.SOCIAL].splice(0, 1)
             widgets.push(<Widget><Social social={content[0]} /></Widget>);
         }
         else if (task === 2) {
             if (props.config[CategoryType.FOOD].length === 0) {
+                i--;
                 continue;
             }
-            const content = props.config[CategoryType.FOOD].splice(0,1)
+            const content = props.config[CategoryType.FOOD].splice(0, 1)
             widgets.push(<Widget><Food food={content[0]} /></Widget>);
         }
         else if (task === 3) {
             if (props.config[CategoryType.WATER].length === 0) {
+                i--;
                 continue;
             }
-            const content = props.config[CategoryType.WATER].splice(0,1)
+            const content = props.config[CategoryType.WATER].splice(0, 1)
             widgets.push(<Widget><Water drink={content[0]} /></Widget>);
+        }else if (task === 4) {
+            if (props.config[CategoryType.SLEEP].length === 0) {
+                i--;
+                continue;
+            }
+            const content = props.config[CategoryType.SLEEP].splice(0, 1)
+            widgets.push(<Widget><Sleep sleep={content[0]} /></Widget>);
+
         }
         else {
             const index = Math.floor(Math.random() * Affirmations.length);

@@ -10,7 +10,7 @@ app = Flask(__name__)
 CORS(app)
 model = whisper.load_model("tiny")
 
-goal_categories = ['exercise', 'food', 'water', 'social']
+goal_categories = ['exercise', 'food', 'water', 'social', "sleep"]
 sentence_classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
 goal_status_pipe = pipeline("sentiment-analysis", model="distilbert/distilbert-base-uncased-finetuned-sst-2-english")
 
@@ -48,6 +48,18 @@ suggestions = {
         "Visit a museum or gallery",
         "Take a group class (cooking, art, etc.)",
         "Participate in a community sports league"
+    ],
+    "sleep": [
+        "Go to bed early",
+        "No caffeine after 10am",
+        "Clean your bedsheets and make your bed",
+        "Put your phone away early",
+        "Read 20 pages of a book before bed",
+        "Try a weighted blanket",
+        "Get up earlier",
+        "Stretch before bed",
+        "Avoid high intensity exercises before bed",
+        "Take some melatonin supplements"
     ],
     "food": [
         "Eat a salad",
@@ -96,7 +108,7 @@ def suggest():
         return Response("Invalid argument", status=400)
 
     # Whitelist topics
-    topics = filter(lambda x: x in goal_categories, topics)
+    topics = list(filter(lambda x: x in goal_categories, topics))
 
     if not topics or not count:
         return Response("Invalid argument", status=400)

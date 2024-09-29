@@ -3,6 +3,7 @@ export enum CategoryType {
     SOCIAL = "social",
     FOOD = "food",
     WATER = "water",
+    SLEEP = "sleep",
 }
 
 export const CategoryList = [
@@ -10,4 +11,5 @@ export const CategoryList = [
     CategoryType.SOCIAL,
     CategoryType.FOOD,
     CategoryType.WATER,
+    CategoryType.SLEEP
 ]

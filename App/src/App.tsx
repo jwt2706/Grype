@@ -4,7 +4,7 @@ import VerticalCarousel from './components/VerticalCarousel'
 import { useEffect, useState } from 'react'
 import Container from './components/Container'
 import { generateWidgets } from './utils/generateWidgets'
-import { CategoryType } from './types/Categories'
+import { CategoryList, CategoryType } from './types/Categories'
 import AnalyzingVoice from './components/categories/AnalyzingVoice'
 import Initialization from './Initialization'
 import { CONFIG } from './config'
@@ -95,7 +95,7 @@ function generateConfig(): Promise<React.ReactNode[]> {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                topics: [CategoryType.EXERCISE, CategoryType.SOCIAL, CategoryType.FOOD, CategoryType.WATER],
+                topics: CategoryList,
                 count: 3
             })
         })
