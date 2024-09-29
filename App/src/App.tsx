@@ -3,7 +3,7 @@ import './App.css'
 import VerticalCarousel from './components/VerticalCarousel'
 import { useEffect, useState } from 'react'
 import Container from './components/Container'
-import { generateWidgets } from './utils/generateWidgets'
+import { GenerateWidgets } from './utils/generateWidgets'
 import { CategoryType } from './types/Categories'
 import AnalyzingVoice from './components/categories/AnalyzingVoice'
 import Initialization from './Initialization'
@@ -119,7 +119,7 @@ const NonInitializedApp = () => {
 
 function generateConfig() {
     const widgetConfig = {
-        [CategoryType.EXERCISE]: ['Run', 'Yoga', 'Gym'],
+        [CategoryType.EXERCISE]: ['You should go for a Run', 'Yoga', 'Gym'],
         [CategoryType.SOCIAL]: ['Call a friend', 'Join a club', 'Attend a meetup'],
         [CategoryType.FOOD]: ['Eat a salad', 'Try a new recipe', 'Have a smoothie'],
         [CategoryType.WATER]: ['Drink a glass of water', 'Have some herbal tea', 'Stay hydrated']
@@ -130,9 +130,10 @@ function generateConfig() {
         numberOfWidgets: 30
     };
 
-    const config = generateWidgets(widgetData);
+    const config = GenerateWidgets(widgetData);
 
     console.log(config);
 
     return (config);
 }
+

@@ -5,6 +5,8 @@ import Social from "../components/categories/Social";
 import Water from "../components/categories/Water";
 import Widget from "../components/Widget";
 import Affirmation from "../components/categories/Affirmation";
+import { useState } from "react";
+import { affirmations } from "./constants";
 
 export interface Widget {
     config: {
@@ -21,7 +23,8 @@ export interface Widget {
 * you need to call the api to get the config
 */
 
-export const generateWidgets = (props: Widget): React.ReactNode[] => {
+export const GenerateWidgets = (props: Widget): React.ReactNode[] => {
+    const [index, setIndex] = useState<number>(0);
     const widgets: React.ReactNode[] = [];
 
     for (let i = 0; i < props.numberOfWidgets; i++) {
@@ -56,7 +59,8 @@ export const generateWidgets = (props: Widget): React.ReactNode[] => {
             widgets.push(<Widget><Water drink={content[0]} /></Widget>);
         }
         else {
-            const affirmation = "You are doing great!";
+            const affirmation = affirmations[index];
+            setIndex(index + 1);
             widgets.push(<Widget><Affirmation affirmation={affirmation}></Affirmation></Widget>);
         }
     }
