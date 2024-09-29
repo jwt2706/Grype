@@ -21,8 +21,20 @@ const Food = (props: FoodProps) => {
         if (foodElement && eatElement) {
             gsap.fromTo(foodElement, { y: -50, opacity: 0 }, { y: 0, opacity: 1, duration: 1 });
 
-            // @ozep i wanna make this shake three times then wait 0.5, then shake three times again.... but idk how to do those loops
-            gsap.fromTo(eatElement, { rotation: -10 }, { rotation: 10, duration: 0.1, yoyo: true, repeat: -1, ease: "power1.inOut" });
+            const shakeAnimation = () => {
+                return gsap.fromTo(eatElement, 
+                    { rotation: -10 }, 
+                    { rotation: 10, duration: 0.1, yoyo: true, repeat: 2, ease: "power1.inOut" }
+                );
+            };
+
+            const repeatShake = async () => {
+                while (true) {
+                    await shakeAnimation().then(() => new Promise(resolve => gsap.delayedCall(1, resolve)));
+                }
+            };
+
+            repeatShake();
         }
     }, []);
 
