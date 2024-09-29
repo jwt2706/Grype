@@ -3,7 +3,7 @@ import './App.css'
 import VerticalCarousel from './components/VerticalCarousel'
 import { useEffect, useState } from 'react'
 import Container from './components/Container'
-import { GenerateWidgets } from './utils/generateWidgets'
+import { generateWidgets } from './utils/generateWidgets'
 import { CategoryType } from './types/Categories'
 import AnalyzingVoice from './components/categories/AnalyzingVoice'
 import Initialization from './Initialization'
@@ -130,7 +130,7 @@ function generateConfig() {
         numberOfWidgets: 30
     };
 
-    const config = GenerateWidgets(widgetData);
+    const config = generateWidgets(widgetData);
 
     console.log(config);
 
