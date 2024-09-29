@@ -10,7 +10,7 @@ export const CONFIG = {
     /**
      * @brief The max widgets that the app will generate for a given day
      */
-    MAX_WIDGETS: 15,
+    MAX_WIDGETS: 10,
     /**
     * @brief The time after which it is considered the end of day (military time)
     */

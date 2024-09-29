@@ -91,9 +91,35 @@ suggestions = {
         "Try homemade flavored water",
         "Start your day with a glass of water in the morning"
     ],
-    "learning": ["Read a book"],
-    "productivity": ["Plan ahead"],
-    "hygene": ["Brush your teeth"]
+    "learning": [
+        "Read a book"
+        "Set clear goals",
+        "Take notes and ask questions",
+        "Perform active recall to reinforce memory",
+        "Teach others what you learn",
+        "Reflect on your learning",
+        "Be curious",
+        "Break complex topics down"
+    ],
+    "productivity": [
+        "Plan ahead",
+        "Prioritize tasks",
+        "Set time limits",
+        "Minimize distractions",
+        "Take breaks",
+        "Use productivity tools",
+        "Establish a routine",
+        "Set clear goals",
+        "Organize your workspace"
+    ],
+    "hygene": [
+        "Brush your teeth",
+        "Use deodorant",
+        "Shower daily",
+        "Wash hands regularly",
+        "Disinfect your living space surfaces",
+        "Store food properly"
+    ]
 }
 
 # Expects { topics: string[], count: number}

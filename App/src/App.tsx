@@ -96,7 +96,7 @@ function generateConfig(): Promise<React.ReactNode[]> {
             },
             body: JSON.stringify({
                 topics: CategoryList,
-                count: 3
+                count: 1
             })
         })
             .then(data => data.json())
