@@ -32,7 +32,6 @@ const AppProvider = () => {
         }
     }, [name])
 
-    console.log(name)
     return (
         <>
             {onInitialLoad ? <InitializeApp setName={setName} /> : <NonInitializedApp />}

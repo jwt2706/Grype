@@ -27,7 +27,7 @@ export class AudioRecorder {
                     return;
                 }
 
-                console.log(error)
+                console.error(error)
             });
     };
 

@@ -41,7 +41,6 @@ const AnalyzingVoice = (props: AnalyzingVoiceProps) => {
         setProcessing(true)
         clearTimeout(stopRecordingTimeout.current);
         recorder.current.finishAudioRecording().then(sentiment => {
-            console.log("Sentiment: ", sentiment)
             alert("Voice processing complete, sentiment: " + (sentiment == 1 ? "Positive" : "Negative"));
 
             setProcessing(false)
