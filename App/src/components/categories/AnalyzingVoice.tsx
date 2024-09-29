@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { CONFIG } from '../../config';
 import { CategoryList } from '../../types/Categories';
 import { AudioRecorder } from '../../services/AudioService';
+import { gsap } from 'gsap';
 
 interface AnalyzingVoiceProps {
     setConfigState: (configState: boolean) => void;
@@ -13,6 +14,14 @@ const AnalyzingVoice = (props: AnalyzingVoiceProps) => {
     const [done, setDone] = useState<boolean>(false);
     const [processing, setProcessing] = useState<boolean>(false);
     const recorder = useRef(new AudioRecorder());
+
+    useEffect(() => {
+        gsap.fromTo(".category-text", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 1 });
+    }, [categoryIndex]);
+    
+    useEffect(() => {
+        gsap.fromTo(".prompt-text", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 1 });
+    }, []);
 
     let stopRecordingTimeout;
 
@@ -55,19 +64,41 @@ const AnalyzingVoice = (props: AnalyzingVoiceProps) => {
 
 
     return (
-        <div>
-            <h1>Please tell me about how this topic affected your day {window.localStorage.getItem("name")}: </h1>
-            <p>{CategoryList[categoryIndex]}</p>
-            <button onClick={() => {
-                if (!recording) startRecording();
-                else stopRecording();
-            }}>{processing ? "Processing input!" : recording ? "Currently recording" : "Start Recording"}</button>
-            <button onClick={() => {
-                localStorage.setItem("config", "");
-                props.setConfigState(false);
-            }}>Skip</button>
+        <div className="flex justify-center items-center h-full bg-black">
+            <div>
+                <div className='p-4 pb-5'>
+                    <div className='prompt-text'>Please tell me about how this topic affected your day {window.localStorage.getItem("name")}: </div>
+                    <div className={`p-4 category-text ${colorOfCategory(CategoryList[categoryIndex])}`}>{CategoryList[categoryIndex]}</div>
+                </div>
+                <div className='pb-5'>
+                <button onClick={() => {
+                    if (!recording) startRecording();
+                    else stopRecording();
+                }}>{processing ? "Processing input!" : recording ? "Currently recording" : "Start Recording"}</button>
+                </div>
+                <button onClick={() => {
+                    localStorage.setItem("config", "");
+                    props.setConfigState(false);
+                }}>Skip</button>
+            </div>
         </div>
     );
 };
 
 export default AnalyzingVoice;
+
+
+const colorOfCategory = (category: string) => {
+    switch (category) {
+        case "food":
+            return "text-orange-200";
+        case "exercise":
+            return "text-purple-400";
+        case "social":
+            return "text-orange-200";
+        case "water":
+            return "text-blue-200";
+        default:
+            return "text-white";
+    }
+}
