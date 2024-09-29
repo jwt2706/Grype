@@ -102,7 +102,7 @@ function generateConfig(): Promise<React.ReactNode[]> {
         })
             .then(data => data.json())
             .then(suggestions => {
-                const widgets = generateWidgets({ config: suggestions, numberOfWidgets: 15 })
+                const widgets = generateWidgets({ config: suggestions, numberOfWidgets: CONFIG.MAX_WIDGETS })
                 resolve(widgets);
             })
             .catch(reject)

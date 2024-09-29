@@ -5,6 +5,7 @@ import Social from "../components/categories/Social";
 import Water from "../components/categories/Water";
 import Widget from "../components/Widget";
 import Affirmation from "../components/categories/Affirmation";
+import EndCard from "../components/categories/EndCard"
 import { Affirmations } from "./constants";
 
 export interface Widget {
@@ -62,5 +63,7 @@ export const generateWidgets = (props: Widget): React.ReactNode[] => {
             widgets.push(<Widget><Affirmation affirmation={affirmation}></Affirmation></Widget>);
         }
     }
+
+    widgets.push(<Widget><EndCard></EndCard></Widget>)
     return widgets;
 }
