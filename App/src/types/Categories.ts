@@ -1,12 +1,12 @@
 export enum CategoryType {
-    EXCERSIZE = "excersize",
+    EXERCISE = "exercise",
     SOCIAL = "social",
     FOOD = "food",
     WATER = "water",
 }
 
 export const CategoryList = [
-    CategoryType.EXCERSIZE,
+    CategoryType.EXERCISE,
     CategoryType.SOCIAL,
     CategoryType.FOOD,
     CategoryType.WATER,
