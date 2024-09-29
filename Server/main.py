@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, Response, request, jsonify
 from flask_cors import CORS, cross_origin
 from transformers import pipeline
 import os
@@ -81,22 +81,37 @@ suggestions = {
     ]
 }
 
+# Expects { topics: string[], count: number}
+@app.route("/suggest", methods=["POST"])
+def suggest():
+    body = request.get_json()
 
-@app.route("/analyze", methods=["POST"])
-def analyze():
-    input_text = request.json.get("text")
-    category = classify_sentence(input_text)
-    goal_status = classify_goal_status(input_text)
-    goal_suggestions = []
-    if goal_status == 0:
-        for i in range(4):
-            selection = random.choice(suggestions[category])
-            goal_suggestions.append(selection)
-    return jsonify({"goal_status": goal_status, "suggestions": goal_suggestions})
+    if not body:
+        return Response("Invalid argument", status=400)
 
-def classify_sentence(sentence):
-    result = sentence_classifier(sentence, goal_categories)
-    return result['labels'][0]
+    try:
+        topics = body["topics"]
+        count = int(body["count"])
+    except:
+        return Response("Invalid argument", status=400)
+
+    # Whitelist topics
+    topics = filter(lambda x: x in goal_categories, topics)
+
+    if not topics or not count:
+        return Response("Invalid argument", status=400)
+
+    output = {}
+    for topic in topics:
+        for i in range(0, min(count, len(suggestions[topic]))):
+            if not topic in output:
+                output[topic] = []
+            suggestion = random.choice(suggestions[topic])
+            while suggestion in output[topic]:
+                suggestion = random.choice(suggestions[topic])
+            output[topic].append(suggestion)
+    
+    return jsonify(output)
 
 def classify_goal_status(sentence):
     result = goal_status_pipe(sentence)

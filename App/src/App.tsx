@@ -7,6 +7,7 @@ import { generateWidgets } from './utils/generateWidgets'
 import { CategoryType } from './types/Categories'
 import AnalyzingVoice from './components/categories/AnalyzingVoice'
 import Initialization from './Initialization'
+import { CONFIG } from './config'
 
 function App() {
     return (
@@ -24,17 +25,17 @@ const AppProvider = () => {
     const [onInitialLoad, setOnInitialLoad] = useState(true);
     const [name, setName] = useState<string | null>(null);
     useEffect(() => {
-      if (!localStorage.getItem('name')) {  
-        setOnInitialLoad(true);
-      } else {
-        setOnInitialLoad(false);
-      }
+        if (!localStorage.getItem('name')) {
+            setOnInitialLoad(true);
+        } else {
+            setOnInitialLoad(false);
+        }
     }, [name])
 
     console.log(name)
     return (
         <>
-            { onInitialLoad ? <InitializeApp setName={setName} /> : <NonInitializedApp /> }
+            {onInitialLoad ? <InitializeApp setName={setName} /> : <NonInitializedApp />}
         </>
     );
 }
@@ -44,13 +45,13 @@ interface InitializeAppProps {
 }
 const InitializeApp = (props: InitializeAppProps) => {
     return (
-      <>
-        <div className="inital h-full w-full">
         <>
-        <Initialization setName={props.setName} />
+            <div className="inital h-full w-full">
+                <>
+                    <Initialization setName={props.setName} />
+                </>
+            </div>
         </>
-        </div>
-      </>
     );
 }
 
@@ -67,73 +68,44 @@ const NonInitializedApp = () => {
             setConfigState(true);
         }
     }, [configState]);
- 
+
 
 
     useEffect(() => {
-        const newWidgets = generateConfig();
-        /*
-
-        for (const slide of slideData) {
-            if (slide instanceof EndOfDayWidgetData) {
-                newWidgets.push(
-                    <Widget>
-                        End of day Widget
-                    </Widget>
-                );
-            }
-            else if (slide instanceof SuggestionWidgetData) {
-                newWidgets.push(
-                    <Widget>
-                        Suggestion: {slide.suggestion}
-                    </Widget>
-                );
-            }
-
-            else if (slide instanceof EndWidgetData) {
-                newWidgets.push(
-                    <Widget>
-                        There are no more wigets :(
-                    </Widget>
-                );
-            } else {
-                console.error("Unknown slide type", slide)
-            }
-        }*/
-
-        setWidgets(newWidgets);
+        generateConfig().then(setWidgets).catch(console.error)
     }, []);
 
     return (
-         /// start with the logic that collects the voice recording then transition to the widgets
+        /// start with the logic that collects the voice recording then transition to the widgets
         <>
-        {configState ? <AnalyzingVoice setConfigState={setConfigState} /> : 
-          <Container>
-              <VerticalCarousel slides={widget}>
-              </VerticalCarousel>
-          </Container>
-    }
+            {configState ? <AnalyzingVoice setConfigState={setConfigState} /> :
+                <Container>
+                    <VerticalCarousel slides={widget}>
+                    </VerticalCarousel>
+                </Container>
+            }
         </>
     );
 }
 
-function generateConfig() {
-    const widgetConfig = {
-        [CategoryType.EXERCISE]: ['You should go for a Run', 'Yoga', 'Gym'],
-        [CategoryType.SOCIAL]: ['Call a friend', 'Join a club', 'Attend a meetup'],
-        [CategoryType.FOOD]: ['Eat a salad', 'Try a new recipe', 'Have a smoothie'],
-        [CategoryType.WATER]: ['Drink a glass of water', 'Have some herbal tea', 'Stay hydrated']
-    };
-
-    const widgetData = {
-        config: widgetConfig,
-        numberOfWidgets: 30
-    };
-
-    const config = generateWidgets(widgetData);
-
-    console.log(config);
-
-    return (config);
+function generateConfig(): Promise<React.ReactNode[]> {
+    return new Promise((resolve, reject) => {
+        fetch(`${CONFIG.BACKEND_HOST}/suggest`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                topics: [CategoryType.EXERCISE, CategoryType.SOCIAL, CategoryType.FOOD, CategoryType.WATER],
+                count: 3
+            })
+        })
+            .then(data => data.json())
+            .then(suggestions => {
+                const widgets = generateWidgets({ config: suggestions, numberOfWidgets: 15 })
+                resolve(widgets);
+            })
+            .catch(reject)
+    })
 }
 

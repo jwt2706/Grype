@@ -57,7 +57,8 @@ export const generateWidgets = (props: Widget): React.ReactNode[] => {
             widgets.push(<Widget><Water drink={content[0]} /></Widget>);
         }
         else {
-            const affirmation = Affirmations[0];
+            const index = Math.floor(Math.random() * Affirmations.length);
+            const affirmation = Affirmations[index];
             widgets.push(<Widget><Affirmation affirmation={affirmation}></Affirmation></Widget>);
         }
     }
