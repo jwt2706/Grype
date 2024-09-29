@@ -87,11 +87,12 @@ def analyze():
     input_text = request.json.get("text")
     category = classify_sentence(input_text)
     goal_status = classify_goal_status(input_text)
+    goal_suggestions = []
     if goal_status == 0:
-        suggestion = random.choice(suggestions[category])
-    else:
-        suggestion = ""
-    return jsonify({"goal_status": goal_status, "suggestion": suggestion})
+        for i in range(4):
+            selection = random.choice(suggestions[category])
+            goal_suggestions.append(selection)
+    return jsonify({"goal_status": goal_status, "suggestions": goal_suggestions})
 
 def classify_sentence(sentence):
     result = sentence_classifier(sentence, goal_categories)
