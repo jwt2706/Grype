@@ -82,6 +82,9 @@ const AnalyzingVoice = (props: AnalyzingVoiceProps) => {
                 }}>Skip</button>
                 <div className="p-5 text-gray-500 mt-20">
                     Revolutionize your habit tracking with growth stimulating byte sized AI suggestions!
+                    <div className="pt-2 text-sm">
+                    <a href="https://devpost.com/software/grype" target="_blank" >For more information</a>
+                    </div>
                 </div>
             </div>
         </div>
