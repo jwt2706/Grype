@@ -22,8 +22,10 @@ export interface Widget {
 * you need to call the api to get the config
 */
 
-export const generateWidgets = (props: Widget): React.ReactNode[] => {
+export const generateWidgets = (data: WidgetData[]): JSX.Element[] => {
     const widgets: React.ReactNode[] = [];
+
+    return 
 
     for (let i = 0; i < props.numberOfWidgets; i++) {
         const task = Math.floor(Math.random() * (4 + 1));
